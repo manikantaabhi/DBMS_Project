@@ -34,4 +34,14 @@
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/RegisterServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmployeeRegistrationServlet</display-name>
+    <servlet-name>EmployeeRegistrationServlet</servlet-name>
+    <servlet-class>com.crop.servlets.EmployeeRegistrationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmployeeRegistrationServlet</servlet-name>
+    <url-pattern>/EmployeeRegistrationServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

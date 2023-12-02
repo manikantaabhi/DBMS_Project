@@ -10,41 +10,48 @@ import java.io.IOException;
 import com.crop.service.RegisterService;
 
 /**
- * Servlet implementation class RegisterServlet
+ * Servlet implementation class EmployeeRegistrationServlet
  */
-public class RegisterServlet extends HttpServlet {
+public class EmployeeRegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public EmployeeRegistrationServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Register servlet");
 		String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String mailId = request.getParameter("mailId");
+        String phoneNumber = request.getParameter("phoneNumber");
+
         String doorNo = request.getParameter("doorNo");
         String street = request.getParameter("street");
         String city = request.getParameter("city");
         String state = request.getParameter("state");
         String postalCode = request.getParameter("postalCode");
         String otherInfo = request.getParameter("otherInfo");
-        String size = request.getParameter("size");
-        String type = request.getParameter("type");
-        String status = request.getParameter("status");
-        String location = request.getParameter("location");
-
-        // Add your logic to process the form data (e.g., store in a database)
         
-        //register farmer
-        // Register address, land then register farmer
         RegisterService registerService = new RegisterService();
-       boolean registered = registerService.registerFarmer(firstName,lastName,username,password,Integer.parseInt(doorNo),street,city,state,postalCode
-        		,otherInfo,size,type,status,location);
-
-       System.out.println(registered);
-        if(registered)
-        	request.setAttribute("registered", username);
-        else
-        	request.setAttribute("registered", null);
-        request.getRequestDispatcher("registerFarmer.jsp").forward(request, response);
+        boolean registered = registerService.registerEmployee(firstName,lastName,username,password,mailId,phoneNumber,Integer.parseInt(doorNo),street,city,state,postalCode
+         		,otherInfo);
 	}
 
 }

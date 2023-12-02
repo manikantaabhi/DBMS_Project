@@ -10,7 +10,7 @@ import com.crop.db.DatabaseConnection;
 
 public class RegisterService {
 
-	public boolean register(String firstName, String lastName, String username, String password, int doorNo,
+	public boolean registerFarmer(String firstName, String lastName, String username, String password, int doorNo,
 			String street, String city, String state, String postalCode, String otherInfo, String size, String type,
 			String status, String location) {
 		Connection connection = null;
@@ -140,5 +140,13 @@ public class RegisterService {
 			}
 		}
 		return null;
+	}
+
+	public boolean registerEmployee(String firstName, String lastName, String username, String password, String mailId,
+			String phoneNumber, int parseInt, String street, String city, String state, String postalCode,
+			String otherInfo) {
+		
+		
+		return false;
 	}
 }

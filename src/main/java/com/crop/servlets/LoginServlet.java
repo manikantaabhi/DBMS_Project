@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet implements Servlet {
         if (loginService.authenticateUser(username, password)) {
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
-            response.sendRedirect("employeeHome.jsp");
+            response.sendRedirect("adminHomePage.jsp");
         } else {
             response.sendRedirect("login.jsp?error=1");
         }
