@@ -20,7 +20,7 @@ public class LoginService {
             String query = "SELECT * FROM users WHERE username=? AND password_hash=?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, username);
-                preparedStatement.setString(2, password);
+                preparedStatement.setString(2, hashPassword(password));
 
                 ResultSet resultSet = preparedStatement.executeQuery();
                 return resultSet.next();

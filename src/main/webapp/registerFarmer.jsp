@@ -22,6 +22,16 @@
 <body>
 
 <div class="container">
+	<% if (request.getAttribute("registered") != null) { %>
+        <script>
+            alert("Registration successful! for user <%=request.getAttribute("registered")%>");
+            window.location.href = "/Crop_Decision_Management_System/employeeHome.jsp";
+        </script>
+    <% }else { %>
+    <script>
+        alert("Registration failed. Please try again...");
+    </script>
+	<% } %>
     <h2>Registration Form</h2>
     <form action=RegisterServlet method="post">
         <!-- Personal Details -->

@@ -36,11 +36,15 @@ public class RegisterServlet extends HttpServlet {
         //register farmer
         // Register address, land then register farmer
         RegisterService registerService = new RegisterService();
-        registerService.register(firstName,lastName,username,password,Integer.parseInt(doorNo),street,city,state,postalCode
+       boolean registered = registerService.register(firstName,lastName,username,password,Integer.parseInt(doorNo),street,city,state,postalCode
         		,otherInfo,size,type,status,location);
 
-        // Redirect to a confirmation page or login page
-        response.sendRedirect("registrationConfirmation.jsp");
+       System.out.println(registered);
+        if(registered)
+        	request.setAttribute("registered", username);
+        else
+        	request.setAttribute("registered", null);
+        request.getRequestDispatcher("registerFarmer.jsp").forward(request, response);
 	}
 
 }

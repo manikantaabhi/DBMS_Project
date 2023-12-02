@@ -10,7 +10,7 @@ import com.crop.db.DatabaseConnection;
 
 public class RegisterService {
 
-	public void register(String firstName, String lastName, String username, String password, int doorNo,
+	public boolean register(String firstName, String lastName, String username, String password, int doorNo,
 			String street, String city, String state, String postalCode, String otherInfo, String size, String type,
 			String status, String location) {
 		Connection connection = null;
@@ -25,9 +25,11 @@ public class RegisterService {
 			
 			String userId = registerUser(connection, username, password);
 
-			registerFarmer(connection,userId, firstName, lastName,addressId,landId);
 
 			connection.commit();
+
+			if(registerFarmer(connection,userId, firstName, lastName,addressId,landId)==1)
+				return true;
 		} catch (SQLException e) {
 			try {
 				if (connection != null) {
@@ -54,6 +56,7 @@ public class RegisterService {
 				e.printStackTrace();
 			}
 		}
+		return false;
 	}
 
 	private static int registerAddress(Connection connection, int doorNo, String street, String city, String state,
@@ -108,7 +111,7 @@ public class RegisterService {
 		return 0;
 	}
 
-	private static void registerFarmer(Connection connection,String userId, String firstName, String lastName, long addressId,
+	private static int registerFarmer(Connection connection,String userId, String firstName, String lastName, long addressId,
 			long landId) throws SQLException {
 
 		String sql = "INSERT INTO farmers(user_id,first_name,last_name,address_id,land_id) VALUES (?,?,?,?,?)";
@@ -118,7 +121,7 @@ public class RegisterService {
 			preparedStatement.setString(3, lastName);
 			preparedStatement.setLong(4, addressId);
 			preparedStatement.setLong(5, landId);
-			preparedStatement.executeUpdate();
+			return preparedStatement.executeUpdate();
 		}
 	}
 	private static String registerUser(Connection connection,String username,String password) throws SQLException
